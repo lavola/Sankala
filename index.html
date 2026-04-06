@@ -1183,11 +1183,13 @@
       siswaUrut.forEach(s => { html += `<option value="${s[0]}">Kelas ${s[2]||'-'}</option>`; }); 
       document.getElementById('listNamaSiswa').innerHTML = html; 
     }
+    
     function bukaModalCatatan() { 
       document.getElementById('formInputCatatan').reset(); 
       document.getElementById('inpCatatanTanggal').valueAsDate = new Date(); 
       modalCatatan.show(); 
     }
+    
     function simpanDataCatatan() { 
       const namaInput = document.getElementById('inpCatatanSiswa').value.trim(); 
       const tanggal = document.getElementById('inpCatatanTanggal').value; 
