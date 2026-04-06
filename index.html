@@ -1185,11 +1185,20 @@
     }
     
     function bukaModalCatatan() { 
-      document.getElementById('formInputCatatan').reset(); 
+      // Cara anti-error untuk mengosongkan isian (tanpa butuh tag form)
+      let form = document.getElementById('formInputCatatan');
+      if (form) { 
+        form.reset(); 
+      } else {
+        document.getElementById('inpCatatanSiswa').value = '';
+        document.getElementById('inpCatatanKategori').value = '';
+        document.getElementById('inpCatatanDetail').value = '';
+      }
+      
       document.getElementById('inpCatatanTanggal').valueAsDate = new Date(); 
       modalCatatan.show(); 
     }
-    
+
     function simpanDataCatatan() { 
       const namaInput = document.getElementById('inpCatatanSiswa').value.trim(); 
       const tanggal = document.getElementById('inpCatatanTanggal').value; 
@@ -1210,10 +1219,11 @@
       }; 
       
       document.getElementById('loading-global').style.display = 'flex';
+      
+      // KODE WAJIB UNTUK GITHUB (Menggantikan google.script.run)
       callAPI('tambahCatatan', [data]).then(res => { 
         document.getElementById('loading-global').style.display = 'none'; 
         if(res.status === 'success') { 
-          document.getElementById('formInputCatatan').reset(); 
           modalCatatan.hide(); 
           muatSemuaDataAwal(); 
         } else {
